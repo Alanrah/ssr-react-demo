@@ -1,11 +1,11 @@
 const path = require('path');
-const webpackNodeExternals = require('webpack-node-externals');
+
 module.exports = {
-    target: 'node',
+    target: 'web',
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-    entry: path.resolve(__dirname, '../server.js'),
+    entry: path.resolve(__dirname, '../client.js'),
     output: {
-        filename: 'bundle_server.js', // dist 目录下的打包结果
+        filename: 'bundle_client.js', // dist 目录下的打包结果
         path: path.resolve(__dirname, '../dist'),
     },
     module: {
@@ -17,5 +17,5 @@ module.exports = {
           },
         ],
       },
-    externals: [webpackNodeExternals()], // node 打包时候，会把 express react 这些源码文件过滤，直接从服务器路径去找依赖
+    // externals: [webpackNodeExternals()], // 前端打包时候，需要把依赖都打包
 }

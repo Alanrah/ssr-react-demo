@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "webpack:build": "webpack --config ./config/webpack.server.js --watch",
+    "webpack:server-build": "webpack --config ./config/webpack.server.js --watch",
+    "webpack:client-build": "webpack --config ./config/webpack.client.js --watch",
     "webpack:start": "nodemon --watch dist --exec node dist/bundle_server.js",
     "dev": "npm-run-all --parallel webpack:*"
   },
@@ -20,10 +21,15 @@
   },
   "homepage": "https://github.com/Alanrah/ssr-react-demo#readme",
   "dependencies": {
+    "babel-loader": "^9.1.0",
     "connect-history-api-fallback": "^2.0.0",
     "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "npm-run-all": "^4.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-redux": "^8.0.5",
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.3"
   },
