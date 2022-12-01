@@ -18,12 +18,12 @@ function createStore(reducer, enhancer) {
 
   function subscribe(listener) {
     listeners.push(listener);
-
-    return function unsubscribe() {
-      const index = listeners.indexOf(listener);
-      listeners.splice(index, 1);
-    };
   }
+
+  function unsubscribe() {
+    const index = listeners.indexOf(listener);
+    listeners.splice(index, 1);
+  };
 
   dispatch({
     type: 'INIT',
@@ -36,13 +36,13 @@ function createStore(reducer, enhancer) {
   };
 }
 
-// function middleware({dispatch, getState}) {
-//   return (next) => {
-//     return (action) => {
-//       return next(action);
-//     };
-//   };
-// }
+function middleware({dispatch, getState}) {
+  return (next) => {
+    return (action) => {
+      return next(action);
+    };
+  };
+}
 
 // createStore(reducer, applyMiddleware(a, b, c))
 function applyMiddleware(...middlewares) {
@@ -78,7 +78,7 @@ function compose(...funcs) {
     return funcs[0];
   }
 
-  // 多个中间件
+  // 多个中间件 经典 函数套函数 todo
   return funcs.reduce(
     (prev, next) =>
       (...args) =>
