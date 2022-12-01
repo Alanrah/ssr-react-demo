@@ -1,12 +1,22 @@
 import React from 'react';
-import ReactDom from 'react-dom/client'
-import {BrowserRouter} from 'react-router-dom';
-import Routes, { routesConfig } from './pages/route';
-import { Helmet } from 'react-helmet';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import createStoreInstance from './store';
+import Routes from './pages/route';
 
-ReactDom.hydrateRoot (
-    document.querySelector('#root'),
+const store = createStoreInstance(window?.__PRELOAD_STATE__);
+
+console.log(99999999999);
+console.log(window?.__PRELOAD_STATE__);
+console.log(store);
+console.log(store.getState());
+
+ReactDOM.hydrate(
+  <Provider store={store}>
     <BrowserRouter>
-        <Routes></Routes>
-    </BrowserRouter>,
+      <Routes />
+    </BrowserRouter>
+  </Provider>,
+  document.querySelector('#root')
 );
